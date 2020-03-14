@@ -1,0 +1,25 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<view class="cu-card article no-card">
+  <view class="cu-item" style="border-bottom: 3rpx solid #eee;">
+      <view class="content">
+        <image src="{{goods.picUrl ? goods.picUrl : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+        <view class="desc solid-bottom row-info">
+          <view class="text-black margin-top-sm overflow-2">{{goods.name}}</view>
+          <view class="text-gray text-sm margin-top-sm overflow-2">已售 {{goods.saleNum}}</view>
+          <view class="flex justify-between" style="margin-bottom:10rpx">
+            <view class="text-price text-bold text-red margin-top-sm padding-lr-sm">{{goods.salesPrice}}</view>
+            <view class="text-gray text-sm margin-top-sm padding-lr-sm" >
+                 <slot name="optionCount" ></slot> 
+            </view>
+          </view>
+        </view>
+      </view>
+  </view>
+</view>

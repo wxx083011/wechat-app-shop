@@ -1,0 +1,134 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<wxs module="numberUtil" src="../../utils/numberUtil.wxs"></wxs>
+<view class="cu-bar bg-white solid-bottom fixed">
+  <view class="action">
+    共{{ shoppingCartData.length }}件宝贝
+  </view>
+  <view class="action">
+    <button class="cu-btn line-red" bindtap="operation">{{operation ? '管理' : '完成'}}</button>
+  </view>
+</view>
+<view style="margin-top:100rpx;margin-bottom:100rpx">
+  <checkbox-group bindchange="checkboxChange">
+    <view class="cu-card article no-card">
+      <view class="cu-item" wx:for="{{ shoppingCartData }}" wx:key>
+        <view class="flex align-center">
+          <checkbox class="red round margin-left" value="{{item.id}}" disabled="{{(item.quantity > item.goodsSku.stock || !item.goodsSku) && operation}}" checked="{{item.checked}}"></checkbox>
+          <navigator hover-class='none' style="width:100%" url='/pages/goods/goods-detail/index?id={{item.spuId}}'>
+            <view class="content">
+              <image src="{{item.goodsSku.picUrl ? item.goodsSku.picUrl : item.goodsSpu.picUrls[0] ? item.goodsSpu.picUrls[0] : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+              <view class="desc row-info">
+                <view class="text-black margin-top-sm overflow-2">{{item.goodsSpu.name}}</view>
+                <view class="text-gray text-sm margin-top-xs cu-tag round" catchtap bindtap="changeSpecs" data-spuid="{{item.goodsSpu.id}}" data-index="{{index}}" wx:if="{{item.goodsSpu.specType == '1'}}">
+                  <view wx:if="{{item.goodsSku}}" wx:for="{{item.specs}}" wx:for-item="item2" 
+                    wx:for-index="index2" wx:key>{{item2.specValueName}}<view class="display-ib" wx:if="{{item.specs.length != (index2+1)}}">;</view>
+                  </view>
+                  <view wx:if="{{!item.goodsSku}}">
+                    {{item.specInfo}}
+                  </view>
+                  <text class="cuIcon-unfold"></text>
+                </view>
+                <view wx:if="{{item.goodsSku}}" class="text-{{item.quantity > item.goodsSku.stock ? 'red' : 'gray'}} margin-top-sm text-right">库存{{item.goodsSku.stock}}</view>
+                <view wx:if="{{item.goodsSku}}">
+                  <view class="text-red margin-top-sm" wx:if="{{(item.addPrice-item.goodsSku.salesPrice) > 0}}">
+                    比加入时降
+                    <view class="text-price display-ib">{{numberUtil.numberFormat(item.addPrice-item.goodsSku.salesPrice,2)}}</view>
+                  </view>
+                  <view class="flex">
+                    <view class="flex-sub">
+                      <view class="text-price text-bold text-red margin-top-sm">{{item.goodsSku.salesPrice}}</view>
+                    </view>
+                    <view class="flex-sub margin-top-sm" catchtap>
+                      <base-stepper
+                        stNum="{{item.quantity}}"
+                        min="1"
+                        max="{{item.goodsSku.stock}}"
+                        bind:numChange="cartNumChang"
+                        data-index="{{index}}"
+                      />
+                    </view>
+                  </view>
+                </view>
+                <view wx:if="{{!item.goodsSku}}" class="margin-top-sm">
+                  <view class="text-red">请重新选择规格</view>
+                </view>
+              </view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </checkbox-group>
+  <!-- 失效商品 -->
+  <view class="cu-bar bg-white solid-bottom margin-top" wx:if="{{shoppingCartDataInvalid.length > 0}}">
+    <view class="action">
+      失效宝贝{{ shoppingCartDataInvalid.length }}件
+    </view>
+    <view class="action">
+      <button class="cu-btn line-red round" bindtap="clearInvalid">清空失效宝贝</button>
+    </view>
+  </view>
+  <view class="cu-card article no-card">
+      <view class="cu-item" wx:for="{{ shoppingCartDataInvalid }}" wx:key>
+        <view class="flex align-center">
+          <navigator hover-class='none' style="width:100%" url='/pages/goods/goods-detail/index?id={{item.spuId}}'>
+            <view class="content">
+              <image src="{{item.goodsSku.picUrl ? item.goodsSku.picUrl : item.goodsSpu.picUrls[0] ? item.goodsSpu.picUrls[0] : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+              <view class="desc row-info">
+                <view class="text-black margin-top-sm overflow-2">{{item.goodsSpu.name}}</view>
+                <view class="text-sm margin-top-lg text-red">
+                  已下架
+                </view>
+              </view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+  </view>
+  <view class="cu-load bg-gray {{loadmore?'loading':''}}"></view>
+  <view class="text-center" wx:if="{{ shoppingCartData.length <= 0 && !loadmore}}">
+    <view class="text-xsl margin-top">
+      <text class="cuIcon-cart text-gray"></text>
+    </view>
+    购物车空空如也~
+    <navigator hover-class='none' url='/pages/goods/goods-list/index'>
+      <button class="cu-btn bg-red margin-top">去逛逛</button>
+    </navigator>
+  </view>
+</view>
+<view class="cu-bar bg-white tabbar border shop foot">
+  <view class="flex align-center">
+    <checkbox-group bindchange="checkboxAllChange">
+      <checkbox class="red round margin-left" value="all" checked="{{isAllSelect}}"></checkbox>
+    </checkbox-group>
+    <view class="text-lg margin-left-xs">全选</view>
+  </view>
+  <view class="action bar-rt" wx:if="{{operation}}">
+    <text class="text-xs text-bold">合计：</text>
+    <text class="text-xl text-price text-red">{{settlePrice}}</text>
+    <button class="cu-btn bg-red round shadow-blur lg margin-left-sm settle-bt" disabled="{{selectValue.length <= 0}}" type="" bindtap="orderConfirm">
+      结算{{selectValue.length > 0 ? '('+selectValue.length+')' : ''}}
+    </button>
+  </view>
+  <view class="action bar-rt" wx:if="{{!operation}}">
+    <button class="cu-btn round line-orange" disabled="{{selectValue.length <= 0}}" bindtap="userCollectAdd">移入收藏夹</button>
+    <button class="cu-btn round line-red margin-left-sm" disabled="{{selectValue.length <= 0}}" bindtap="shoppingCartDel">删除</button>
+  </view>
+</view>
+<goods-sku
+  goodsDetail="{{goodsDetail}}"
+  goodsSpecData="{{goodsSpecData}}"
+  skuData="{{skuData}}"
+  cartNum="{{shoppingCartSelect.quantity}}"
+  shoppingCartId="{{shoppingCartSelect.id}}"
+  modalSku="{{modalSku}}"
+  modalSkuType="{{modalSkuType}}"
+  bind:operateCartEvent="operateCartEvent"
+/>

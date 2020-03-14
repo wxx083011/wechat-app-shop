@@ -1,0 +1,167 @@
+.cu-bar {
+	min-height: 80rpx !important
+}
+
+.cuIcon-triangledownfill {
+	margin-top: -22rpx
+}
+
+/* 底部结算 */
+
+.settlement {
+	position: fixed;
+	bottom: 0rpx;
+	left: 0rpx;
+	z-index: 1000;
+	height: 90rpx;
+	background: #ffffff;
+	width: 100%;
+	display: flex;
+}
+
+.settlement .all-select {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	top: -30rpx;
+	left: 30rpx;
+	width: 100rpx;
+	height: 100rpx;
+	background: #eee;
+	border-radius: 50%;
+}
+
+
+
+.countRed {
+	width: 45rpx;
+	height: 45rpx;
+	background: red;
+	border-radius: 50%;
+	color: #fff;
+	position: absolute;
+	top: 0;
+	right: -10rpx;
+	font-size: 24rpx;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.settlement .all-select image {
+	width: 80rpx;
+	height: 80rpx;
+}
+
+.settlement .all-select text {
+	font-size: 28rpx;
+	font-family: SourceHanSansCN;
+	font-weight: 400;
+	color: rgba(71, 71, 71, 1);
+	margin: 26rpx 0 0rpx 19rpx;
+}
+
+.settlement .total {
+	width: 373rpx;
+	text-align: right;
+	line-height: 88rpx;
+	font-size: 36rpx;
+	font-family: SourceHanSansCN;
+	font-weight: bold;
+	color: rgba(51, 51, 51, 1);
+}
+
+.settlement .total text {
+	margin-right: 20rpx;
+}
+
+.settlement .to-pay {
+	width: 210rpx;
+	height: 88rpx;
+	background: #eee;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 32rpx;
+	font-family: SourceHanSansCN;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 1);
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.settlement .to-pay-can {
+	background: rgba(0, 165, 120, 1);
+}
+
+.onLogin {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+}
+
+.onLogin image {
+	width: 192rpx;
+	height: 192rpx;
+	margin-bottom: 30rpx;
+}
+
+.onLogin button {
+	width: 300rpx;
+	height: 100rpx;
+	border-radius: 10rpx;
+	background: rgba(0, 165, 120, 1);
+	font-size: 40rpx;
+	color: #ffffff;
+	margin-top: 50%;
+}
+
+.add {
+	width: 40rpx;
+	height: 40rpx
+}
+
+.goods-count {
+	width: 80rpx;
+	height: 44rpx;
+	background: rgba(245, 245, 245, 1);
+	font-size: 30rpx;
+	font-family: Helvetica;
+	font-weight: 400;
+	color: rgba(51, 51, 51, 1);
+	text-align: center;
+	margin: 0 15rpx;
+}
+
+.divider view {
+	display: inline-block;
+	position: relative;
+}
+
+.divider view::after {
+	content: '';
+	display: block;
+	width: 60rpx;
+	height: 2rpx;
+	background: #333333;
+	position: absolute;
+	left: 80rpx;
+	top: 50%;
+
+}
+
+.divider view::before {
+	content: '';
+	display: block;
+	width: 60rpx;
+	height: 2rpx;
+	background: #333333;
+	position: absolute;
+	left: -80rpx;
+	top: 50%;
+}

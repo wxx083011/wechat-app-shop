@@ -1,0 +1,38 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<view class="flex justify-end">
+  <button class="cu-btn round line-grey margin-right" bindtap="orderDel" loading="{{loading}}" 
+  disabled="{{loading}}" type="" wx:if="{{orderInfo.status == '5'}}">
+    删除订单
+  </button>
+  <button class="cu-btn round line-grey margin-right" bindtap="orderCancel" loading="{{loading}}" 
+  disabled="{{loading}}" type="" wx:if="{{orderInfo.isPay == '0' && !orderInfo.status}}">
+    取消订单
+  </button>
+  <button class="cu-btn round line-grey margin-right" bindtap="orderLogistics" loading="{{loading}}" 
+  disabled="{{loading}}" type="" wx:if="{{orderInfo.status == '2' || orderInfo.status == '3' || orderInfo.status == '4'}}">
+    查看物流
+  </button>
+  <button class="cu-btn round line-red margin-right" bindtap="unifiedOrder" loading="{{loading}}" 
+  disabled="{{loading}}" type="" wx:if="{{orderInfo.isPay == '0' && !orderInfo.status}}">
+    付款
+  </button>
+  <button class="cu-btn round line-red margin-right" bindtap="urgeOrder" loading="{{loading}}" 
+  disabled="{{loading}}" type="" wx:if="{{orderInfo.status == '1'}}">
+    提醒卖家发货
+  </button>
+  <button class="cu-btn round line-red margin-right" bindtap="orderReceive" loading="{{loading}}" 
+  disabled="{{loading}}" type="" wx:if="{{orderInfo.status == '2'}}">
+    确认收货
+  </button>
+  <button class="cu-btn round line-red margin-right" bindtap="orderAppraise" loading="{{loading}}" 
+  disabled="{{loading}}" type="" wx:if="{{orderInfo.status == '3' && orderInfo.appraisesStatus == '0'}}">
+    评价
+  </button>
+</view>

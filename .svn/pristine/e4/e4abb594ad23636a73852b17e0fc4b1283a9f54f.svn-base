@@ -1,0 +1,24 @@
+@import "/app.wxss";
+.row-img{
+  width: 150rpx!important;
+  height: 150rpx!important;
+  border-radius: 10rpx
+}
+.row-info{
+  display: block!important;
+}
+.add{
+  width:40rpx;
+  height:40rpx
+}
+ .goods-count {
+  width: 80rpx;
+  height: 44rpx;
+  background: rgba(245, 245, 245, 1);
+  font-size: 30rpx;
+  font-family: Helvetica;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  text-align: center;
+  margin: 0 15rpx;
+}

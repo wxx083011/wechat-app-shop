@@ -1,0 +1,151 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<view class="margin-bottom-bar">
+	<view class="bg-white padding">
+		<view class="status-desc text-red margin-left text-bold cuIcon-{{orderInfo.status == '0' ? 'pay' : orderInfo.status == '1' ? 'send' : orderInfo.status == '2' ? 'deliver' : orderInfo.status == '3' ? 'evaluate' : orderInfo.status == '4' ? 'upstage' : orderInfo.status == '5' ? 'roundclose' : ''}}">
+			{{orderInfo.statusDesc}}
+		</view>
+		<view class="text-black margin-left" wx:if="{{orderInfo.isPay == '0' && !orderInfo.status}}">
+			请在{{countDown.min}}分{{countDown.sec}}秒内付款，超时订单将自动取消
+		</view>
+		<view class="text-black margin-left" wx:if="{{orderInfo.status == '2'}}">
+			还剩{{countDown.day}}天{{countDown.hou}}时{{countDown.min}}分{{countDown.sec}}秒自动确认
+		</view>
+	</view>
+	<view class="cu-list cu-card menu-avatar">
+		<navigator class="cu-item" url='/pages/order/order-logistics/index?id={{orderInfo.orderLogistics.id}}' wx:if="{{orderInfo.status == '2' || orderInfo.status == '3' || orderInfo.status == '4'}}">
+			<view class="cu-avatar round cuIcon-deliver bg-red"></view>
+			<view class="content loc-content">
+				<view class="flex">
+					<view class="text-black">{{orderInfo.orderLogistics.statusDesc}}</view>
+					<view class="text-sm margin-left-sm">{{orderInfo.orderLogistics.logisticsDesc}}</view>
+				</view>
+				<view class="text-black text-sm overflow-2 loc-info" wx:if="{{orderInfo.orderLogistics.message}}">
+					{{orderInfo.orderLogistics.message}}
+				</view>
+			</view>
+			<view class="action">
+				<text class="cuIcon-right"></text>
+			</view>
+		</navigator>
+		<view class="cu-item">
+			<view class="cu-avatar round cuIcon-location bg-orange"></view>
+			<view class="content loc-content">
+				<view class="flex">
+					<view class="text-black">{{orderInfo.orderLogistics.userName}}</view>
+					<view class="text-gray text-sm margin-left-sm">{{orderInfo.orderLogistics.telNum}}</view>
+				</view>
+				<view class="text-black text-sm overflow-2 loc-info">
+					{{orderInfo.orderLogistics.address}}
+				</view>
+			</view>
+		</view>
+		<view class="cu-item" wx:if="serviceStation">
+			<view class="cu-avatar">提</view>
+			<view class="content loc-content">
+				<view class="flex">
+					<view class="text-black">{{serviceStation.name}}</view>
+					<view class="text-gray text-sm margin-left-sm">[{{serviceStation.phone}}]</view>
+				</view>
+				<view class="text-black text-sm overflow-2 loc-info">
+					{{serviceStation.province}}{{serviceStation.city}}{{serviceStation.county}}{{serviceStation.address}}
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-card article mar-top-30">
+		<view class="cu-item">
+			<view class="cu-list menu">
+				<view wx:for="{{ orderInfo.listOrderItem }}" wx:key>
+					<navigator hover-class='none' url='/pages/goods/goods-detail/index?id={{item.spuId}}' class="cu-item">
+						<view class="flex align-center">
+							<view class="content response">
+								<image src="{{item.picUrl ? item.picUrl : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+								<view class="desc row-info">
+									<view class="text-black margin-top-sm overflow-2">{{item.spuName}}</view>
+									<view class="text-gray text-sm margin-top-sm overflow-2" wx:if="{{item.specInfo}}">{{item.specInfo}}</view>
+									<view class="flex justify-between">
+										<view class="text-price text-bold text-red margin-top-sm padding-lr-sm">{{item.salesPrice}}</view>
+										<view class="text-black text-sm margin-top-sm padding-lr-sm">x{{item.quantity}}</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</navigator>
+					<view class="cu-item text-right padding-sm">
+						<navigator class="cu-btn line sm" url='/pages/order/order-refunds/submit/index?orderItemId={{item.id}}' wx:if="{{orderInfo.isPay == '1' && item.status == '0'}}">
+							申请售后
+						</navigator>
+						<navigator class="cu-btn line sm text-orange" url='/pages/order/order-refunds/form/index?orderItemId={{item.id}}'
+						 wx:if="{{orderInfo.isPay == '1' && item.status != '0'}}">
+							{{item.statusDesc}}
+						</navigator>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">商品总价</text>
+					</view>
+					<view class="action">
+						<view class="text-price">{{orderInfo.salesPrice}}</view>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">运费</text>
+					</view>
+					<view class="action">
+						<view class="text-price">{{orderInfo.logisticsPrice}}</view>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">付款金额</text>
+					</view>
+					<view class="action">
+						<view class="text-price text-red text-bold">{{orderInfo.paymentPrice}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-card mar-top-30">
+		<view class="cu-item">
+			<view class="cu-bar bg-white">
+				<view class="action">
+					<text class="cuIcon-titles text-orange "></text> 订单信息
+				</view>
+			</view>
+			<view class="margin flex">
+				<text class="flex-sub">订单编号</text>
+				<view class="flex-twice">{{orderInfo.orderNo}}
+					<button class="cu-btn sm" bindtap="copyData" data-data="{{orderInfo.orderNo}}">复制</button>
+				</view>
+			</view>
+			<view class="margin flex">
+				<text class="flex-sub">创建时间</text>
+				<view class="flex-twice">{{orderInfo.createTime}}</view>
+			</view>
+			<view class="margin flex" wx:if="{{orderInfo.paymentTime}}">
+				<text class="flex-sub">付款时间</text>
+				<view class="flex-twice">{{orderInfo.paymentTime}}</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-card mar-top-30" wx:if="{{orderInfo.userMessage}}">
+		<view class="cu-item cu-form-group align-start">
+			<view class="title">给卖家留言</view>
+			<textarea readonly value="{{orderInfo.userMessage}}"></textarea>
+		</view>
+	</view>
+</view>
+<view class="cu-bar bg-white border foot">
+	<order-operate class="response" orderInfo="{{orderInfo}}" callPay="{{callPay}}" bind:orderCancel="orderCancel"
+	 bind:orderReceive="orderCancel" bind:orderDel="orderDel" bind:unifiedOrder="unifiedOrder" />
+</view>

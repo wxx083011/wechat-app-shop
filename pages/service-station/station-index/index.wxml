@@ -1,0 +1,20 @@
+<view class="cu-list menu card-menu margin-top-sm radius" style="height: 110rpx;">
+	<view class="cu-list grid col-2" style="margin-top: -5rpx;">
+		<view class="cu-item">
+			<view class="text-red">{{profit.yesterdayMoney =='--' ? '统计中' : profit.yesterdayMoney}}</view>
+			<text>昨日收益</text>
+		</view>
+		<view class="cu-item">
+			<view class="text-red">{{profit.tatalMoney =='--' ? '统计中' : profit.tatalMoney}}</view>
+			<text>总收益</text>
+		</view>
+	</view>
+</view>
+<view class="cu-list menu card-menu margin-top-xl shadow-lg radius">
+	<navigator class="cu-item arrow" url="/pages/service-station/station-order/index?serviceStationId={{serviceStationId}}" hover-class="none">
+		<view class="content">
+			<text class="cuIcon-ticket text-orange"></text>
+			<text class="text-grey">站点订单</text>
+		</view>
+	</navigator>
+</view>

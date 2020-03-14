@@ -1,0 +1,45 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<view class="cu-form-group">
+	<view class="title">选择日期</view>
+	<picker mode="date" value="{{date}}" start="2020-02-01" end="2020-12-31" bindchange="bindDateChange">
+		<view class="picker">
+			{{date}}
+		</view>
+	</picker>
+</view>
+<view>
+	<view class="cu-card article">
+		<view class="cu-item" wx:for="{{ orderList }}" wx:key wx:for-index="index">
+			<navigator hover-class='none' url='/pages/service-station/station-detail/index?id={{item.id}}'>
+				<view class="cu-bar bg-white">
+					<view class="action">
+						<text class="cuIcon-titles text-orange "></text> {{ item.userName }} {{item.telNum}}
+					</view>
+					<view class="action">
+						{{item.orderNo}}
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<view class="desc row-info">
+							<view class="text-black margin-top-sm overflow-2">
+								<text wx:for="{{ item.itemList }}" wx:for-item="item2" wx:key wx:for-index="index2">{{item2.spuName}} x{{item2.num}}；</text> 
+							</view>
+						</view>
+					</view>
+				</view>
+				<view class="cu-item text-right" style="margin-bottom: -15rpx;  margin-top: 10rpx; ">
+				   <text style="color: red;margin-right: 25rpx;">￥{{item.percentage}}</text>
+				</view>
+			</navigator>
+		</view>
+	</view>
+	<view class="cu-load bg-gray {{loadmore?'loading':'over'}}"></view>
+</view>

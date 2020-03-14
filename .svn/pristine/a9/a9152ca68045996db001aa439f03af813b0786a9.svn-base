@@ -1,0 +1,74 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/base/search/index",
+    "pages/goods/goods-category/index",
+    "pages/goods/goods-list/index",
+    "pages/goods/goods-detail/index",
+    "pages/shopping-cart/index",
+    "pages/order/order-confirm/index",
+    "pages/order/order-list/index",
+    "pages/order/order-detail/index",
+    "pages/order/order-logistics/index",
+    "pages/user/user-center/index",
+    "pages/user/user-address/list/index", 
+    "pages/user/user-address/form/index",
+    "pages/user/user-collect/index",
+    "pages/appraises/form/index",
+    "pages/appraises/list/index",
+    "pages/order/order-refunds/form/index",
+    "pages/order/order-refunds/submit/index",
+    "pages/web-view/web-view",
+    "pages/tuangou/goods-list/index",
+    "pages/tuangou/user-address/index",
+	"pages/service-station/station-index/index",
+	"pages/service-station/station-order/index",
+	"pages/service-station/station-detail/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "backgroundColor": "#ffffff",
+    "color": "#282828",
+    "selectedColor": "#e93323",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "public/img/1-001.png",
+        "selectedIconPath": "public/img/1-002.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/goods/goods-category/index",
+        "iconPath": "public/img/2-001.png",
+        "selectedIconPath": "public/img/2-002.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/shopping-cart/index",
+        "iconPath": "public/img/3-001.png",
+        "selectedIconPath": "public/img/3-002.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/user/user-center/index",
+        "iconPath": "public/img/4-001.png",
+        "selectedIconPath": "public/img/4-002.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于展示附近提货点" 
+    }
+  }
+}

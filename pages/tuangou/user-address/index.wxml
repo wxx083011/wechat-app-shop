@@ -1,0 +1,31 @@
+<view>
+	<view class="cu-card article">
+		<view>
+			<view class="cu-list menu-avatar">
+				<view class="cu-item" wx:for="{{ ztArray }}" wx:key>
+					<view class="cu-avatar round bg-red">
+						<text class="avatar-text">{{item.name}}</text>
+					</view>
+					<view class="content loc-content" bindtap="selectUserAddress" data-index="{{index}}">
+						<view class="flex">
+							<view class="text-black">{{item.name}}</view>
+							<view class="text-gray text-sm margin-left-sm">[{{item.phone}}]</view>
+						</view>
+						<view class="text-black text-sm overflow-2 loc-info">
+							{{item.city}}{{item.county}}{{item.address}}
+						</view>
+					</view>
+					<view>
+						<view class="text-gray text-sm">{{item.distance}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view>
+			<button class="cu-btn block bg-red margin-sm" bindtap="openSetting" wx:if="{{showSetting}}">
+				<text class="cuIcon-add"></text>开启位置授权
+			</button>
+		</view>
+	</view>
+	<view class="cu-load bg-gray {{loadmore?'loading':'over'}}" wx:if="{{!showSetting}}"></view>
+</view>

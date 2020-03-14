@@ -1,0 +1,60 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<wxs module="numberUtil" src="../../../../utils/numberUtil.wxs"></wxs>
+<view class="cu-bar bg-white solid-bottom">
+  <view class="action">
+    <text class="cuIcon-title text-orange"></text>退款信息
+  </view>
+</view>
+<view class="cu-card no-card article">
+  <view class="cu-item">
+    <view class="content response">
+      <image src="{{orderItem.picUrl ? orderItem.picUrl : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+      <view class="desc row-info">
+        <view class="text-black margin-top-sm overflow-2">{{orderItem.spuName}}</view>
+        <view class="text-gray text-sm margin-top-sm overflow-2" wx:if="{{orderItem.specInfo}}">{{orderItem.specInfo}}</view>
+        <view class="flex justify-between">
+          <view class="text-price text-red margin-top-sm padding-lr-sm">{{orderItem.salesPrice}}</view>
+          <view class="text-black text-sm margin-top-sm padding-lr-sm">x{{orderItem.quantity}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="padding solid-top">
+      退款状态：
+      <text class="cu-tag line-red">{{orderRefunds.statusDesc}}</text>
+    </view>
+    <view class="padding solid-top">
+      退款总额：
+      <text class="text-price text-bold text-red">{{numberUtil.numberFormat(orderItem.quantity * orderItem.salesPrice,2)}}</text>
+    </view>
+    <view class="padding">
+      退款数量：x{{orderItem.quantity}}
+    </view>
+    <view class="padding">
+      是否到账：
+      <text class="cu-tag line-{{orderItem.isRefund == '1' ? 'green' : 'red'}}">{{orderItem.isRefund == '1' ? '是' : '否'}}</text>
+    </view>
+    <view class="padding" wx:if="{{orderRefunds.refuseRefundReson}}">
+      拒绝原因：{{orderRefunds.refuseRefundReson}}
+    </view>
+  </view>
+</view>
+<view class="cu-card no-card padding-top-xs">
+  <view class="cu-item cu-form-group align-start">
+    <view class="title">退款原因</view>
+    <textarea maxlength="40" bindinput="resonInput" placeholder="请输入退款原因" value="{{orderRefunds.refundReson}}"></textarea>
+  </view>
+</view>
+<view class="cu-bar bg-white tabbar foot justify-end">
+  <button open-type="contact" bindcontact="handleContact" class="cu-btn margin-right">
+    <view class="cuIcon-servicefill"></view>联系客服
+  </button>
+</view>

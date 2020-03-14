@@ -1,0 +1,71 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<!-- <scroll-view scroll-x class="bg-white nav fixed">
+	<view class="flex text-center">
+		<view class="cu-item flex-sub {{index==tabCur?'text-red cur':''}}" wx:for="{{orderStatus}}" wx:key bindtap="tabSelect"
+		 data-index="{{index}}" data-key="{{item.key}}">
+			{{item.value}}
+		</view>
+	</view>
+</scroll-view> -->
+<view>
+	<view class="cu-card article">
+		<!-- <view wx:if="{{tabCur == '0'}}">
+			<button class="cu-btn block bg-red margin-sm" wx:if="{{userAddress.length < 10}}" bindtap="toAdd">
+				<text class="cuIcon-add"></text>添加新地址
+			</button>
+			<view class="cu-list menu-avatar">
+				<view class="cu-item" wx:for="{{ userAddress }}" wx:key>
+					<view class="cu-avatar round bg-red">
+						<text class="avatar-text">{{item.userName}}</text>
+					</view>
+					<view class="content loc-content" bindtap="selectUserAddress" data-index="{{index}}">
+						<view class="flex">
+							<view class="text-black">{{item.userName}}</view>
+							<view class="text-gray text-sm margin-left-sm">{{item.telNum}}</view>
+						</view>
+						<view class="text-black text-sm overflow-2 loc-info">
+							{{item.provinceName}}{{item.cityName}}{{item.countyName}}{{item.detailInfo}}
+						</view>
+					</view>
+					<view class="action" bindtap="toEdit" data-index="{{index}}">
+						<text class="cuIcon-edit"></text>
+					</view>
+				</view>
+			</view>
+		</view> -->
+		<view>
+			<button class="cu-btn block bg-red margin-sm" wx:if="{{userAddress.length < 10}}" bindtap="toAdd">
+				<text class="cuIcon-add"></text>添加新地址
+			</button>
+			<view class="cu-list menu-avatar">
+				<view class="cu-item" wx:for="{{ userAddress }}" wx:key>
+					<view class="cu-avatar round bg-red">
+						<text class="avatar-text">{{item.userName}}</text>
+					</view>
+					<view class="content loc-content" bindtap="selectUserAddress" data-index="{{index}}">
+						<view class="flex">
+							<view class="text-black">{{item.userName}}</view>
+							<view class="text-gray text-sm margin-left-sm">{{item.telNum}}</view>
+						</view>
+						<view class="text-black text-sm overflow-2 loc-info">
+							<view class="cu-tag bg-orange sm margin-left-sm" wx:if="{{item.isDefault == '1'}}">默认</view>
+							{{item.provinceName}}{{item.cityName}}{{item.countyName}}{{item.detailInfo}}
+						</view>
+					</view>
+					<view class="action" bindtap="toEdit" data-index="{{index}}">
+						<text class="cuIcon-edit"></text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+	</view>
+	<view class="cu-load bg-gray {{loadmore?'loading':'over'}}"></view>
+</view>

@@ -1,0 +1,99 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<view class="margin-bottom-bar">
+	<view class="cu-list cu-card menu-avatar">
+		<view class="cu-item">
+			<view class="cu-avatar round cuIcon-location bg-orange"></view>
+			<view class="content loc-content">
+				<view class="flex">
+					<view class="text-black">{{orderInfo.orderLogistics.userName}}</view>
+					<view class="text-gray text-sm margin-left-sm">{{orderInfo.orderLogistics.telNum}}</view>
+				</view>
+				<view class="text-black text-sm overflow-2 loc-info">
+					{{orderInfo.orderLogistics.address}}
+				</view>
+			</view>
+		</view>
+		<view class="cu-item" wx:if="serviceStation">
+			<view class="cu-avatar">提</view>
+			<view class="content loc-content">
+				<view class="flex">
+					<view class="text-black">{{serviceStation.name}}</view>
+					<view class="text-gray text-sm margin-left-sm">[{{serviceStation.phone}}]</view>
+				</view>
+				<view class="text-black text-sm overflow-2 loc-info">
+					{{serviceStation.province}}{{serviceStation.city}}{{serviceStation.county}}{{serviceStation.address}}
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-card article mar-top-30">
+		<view class="cu-item">
+			<view class="cu-list menu">
+				<view wx:for="{{ orderInfo.listOrderItem }}" wx:key>
+					<navigator hover-class='none' class="cu-item">
+						<view class="flex align-center">
+							<view class="content response">
+								<image src="{{item.picUrl ? item.picUrl : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+								<view class="desc row-info">
+									<view class="text-black margin-top-sm overflow-2">{{item.spuName}}</view>
+									<view class="text-gray text-sm margin-top-sm overflow-2" wx:if="{{item.specInfo}}">{{item.specInfo}}</view>
+									<view class="flex justify-between">
+										<view class="text-price text-bold margin-top-sm padding-lr-sm">{{item.salesPrice}}</view>
+										<view class="text-black text-sm margin-top-sm padding-lr-sm">x{{item.quantity}}</view>
+									</view>
+									<view class="flex justify-between">
+										<view class="text-sm text-red margin-top-sm padding-lr-sm">收益：{{item.percentageMoney}}</view>
+									</view>
+								</view>
+							</view>
+						</view>
+					</navigator>
+				</view>
+				<view class="cu-item" style="margin-top: 20rpx;">
+					<view class="content">
+						<text class="text-grey">商品总价</text>
+					</view>
+					<view class="action">
+						<view class="text-price">{{orderInfo.salesPrice}}</view>
+					</view>
+				</view>
+				<view class="cu-item">
+					<view class="content">
+						<text class="text-grey">订单收益</text>
+					</view>
+					<view class="action">
+						<view class="text-price text-red text-bold">{{orderInfo.totalPercentageMoney}}</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="cu-card mar-top-30">
+		<view class="cu-item">
+			<view class="cu-bar bg-white">
+				<view class="action">
+					<text class="cuIcon-titles text-orange "></text> 订单信息
+				</view>
+			</view>
+			<view class="margin flex">
+				<text class="flex-sub">订单编号</text>
+				<view class="flex-twice">{{orderInfo.orderNo}}</view>
+			</view>
+			<view class="margin flex">
+				<text class="flex-sub">创建时间</text>
+				<view class="flex-twice">{{orderInfo.createTime}}</view>
+			</view>
+			<view class="margin flex" wx:if="{{orderInfo.paymentTime}}">
+				<text class="flex-sub">付款时间</text>
+				<view class="flex-twice">{{orderInfo.paymentTime}}</view>
+			</view>
+		</view>
+	</view>
+</view>

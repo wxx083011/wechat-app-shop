@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "生鲜预定",
+  "usingComponents": {
+    "goods-card": "/components/goods-card/index",
+    "goods-row": "/components/goods-row-tg/index"
+  }
+}

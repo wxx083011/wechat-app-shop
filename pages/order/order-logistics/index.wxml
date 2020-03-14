@@ -1,0 +1,36 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<view class="bg-white padding">
+  <view class="text-black">物流单号：{{orderLogistics.logisticsNo}}
+    <button class="cu-btn sm" bindtap="copyData" data-data="{{orderLogistics.logisticsNo}}">复制</button>
+  </view>
+  <view class="text-black">物流公司：{{orderLogistics.logisticsDesc}}</view>
+  <view class="text-black">当前状态：{{orderLogistics.statusDesc}}</view>
+</view>
+<view class="cu-card">
+  <view class="cu-item">
+    <view class="cu-timeline" wx:if="{{orderLogistics.listOrderLogisticsDetail.length <= 0}}">
+      <view class="cu-item">
+        <view class="content">暂无物流信息</view>
+      </view>
+    </view>
+    <view class="cu-timeline" wx:for="{{orderLogistics.listOrderLogisticsDetail}}" wx:key>
+      <view class="cu-item {{index == 0 ? 'text-red cuIcon-location' : ''}}">
+        <view class="content {{index == 0 ? 'bg-red' : ''}}">
+          <view class="text-gray">
+            {{item.logisticsTime}}
+          </view>
+          <view>
+            {{item.logisticsInformation}}
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

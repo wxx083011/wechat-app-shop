@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "站点订单",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+  }
+}

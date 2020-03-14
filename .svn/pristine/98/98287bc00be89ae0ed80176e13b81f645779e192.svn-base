@@ -1,0 +1,17 @@
+.bar-rt{
+  width: 480rpx!important;
+  text-align: right!important;
+  margin-right: 10rpx!important
+}
+.settle-bt{
+  width: 200rpx
+}
+.row-img{
+  width: 200rpx!important;
+  height: 200rpx!important;
+  border-radius: 10rpx
+}
+.row-info{
+  display: block!important;
+  width: 60%;
+}

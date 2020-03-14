@@ -1,0 +1,34 @@
+<view style="margin-top:0rpx;margin-bottom:-120rpx;">
+	<view class="cu-bar bg-white" wx:if="{{msg}}">
+		<text class='action border-title' style="border: 2rpx solid #eee;padding-left: 18rpx;padding-right: 18rpx;padding-bottom: 18rpx;margin-top: 15rpx;">
+			{{msg}}
+		</text>
+	</view>
+	<view wx:for="{{tgList}}" wx:for-index="idx">
+		<view class="cu-bar justify-center bg-white">
+			<view class="divider">
+				<view>{{item.categoryName}}</view>
+			</view>
+		</view>
+		<goods-row goods="{{goods}}" wx:for="{{ item.children }}" wx:key="" wx:for-item="goods">
+			<view slot="optionCount" style="display:flex">
+				<image data-skuid="{{goods.skuId}}" class="add" data-index="{{index}}" wx:if="{{countObj[goods.skuId]>0}}" src='/public/img/delete.png'
+				 catchtap="deleteCount"></image>
+				<input class="goods-count" type='number' maxlength="4" disabled wx:if="{{countObj[goods.skuId]>0}}" value="{{countObj[goods.skuId]}}"></input>
+				<image data-skuid="{{goods.skuId}}" class="add" data-index="{{index}}" src='/public/img/add.png' catchtap="addCount"></image>
+			</view>
+		</goods-row>
+	</view>
+	<!-- 结算底部 -->
+	<view class="settlement">
+		<view class="all-select" bindtap="seleGoods">
+			<view class="countRed" wx:if='{{totalNum>0}}'> {{totalNum}}</view>
+			<image src="/public/img/cart-sele.png"></image>
+		</view>
+		<view class="total">
+			<text class="text-xl text-price text-red">{{totalPrice}}</text>
+		</view>
+		<view class="to-pay {{totalNum>0?'to-pay-can':''}}" bindtap="orderConfirm">去提交</view>
+	</view>
+	<view class="cu-load bg-gray {{loadmore?'loading':'over'}}"></view>
+</view>

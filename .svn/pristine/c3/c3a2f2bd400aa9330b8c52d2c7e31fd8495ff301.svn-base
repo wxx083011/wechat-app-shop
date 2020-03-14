@@ -1,0 +1,109 @@
+<!--
+  - Copyright (C) 2018-2019
+  - All rights reserved, Designed By www.joolun.com
+  - 注意：
+  - 本软件为www.joolun.com开发研制，未经购买不得使用
+  - 购买后可获得全部源代码（禁止转卖、分享、上传到码云、github等开源平台）
+  - 一经发现盗用、分享等行为，将追究法律责任，后果自负
+-->
+<view class="margin-bottom-bar">
+
+	<view class="cu-list cu-card menu-avatar">
+		<navigator class="cu-item" url='/pages/user/user-address/list/index?select=true'>
+			<view class="cu-avatar round cuIcon-location bg-orange"></view>
+			<view class="content loc-content" wx:if="{{userAddress}}">
+				<view class="flex">
+					<view class="text-black">{{userAddress.userName}}</view>
+					<view class="text-gray text-sm margin-left-sm">{{userAddress.telNum}}</view>
+				</view>
+				<view class="text-black text-sm overflow-2 loc-info">
+					<view class="cu-tag bg-red sm margin-left-sm" wx:if="{{userAddress.isDefault == '1'}}">默认</view>
+					{{userAddress.provinceName}}{{userAddress.cityName}}{{ituserAddressem.countyName}}{{userAddress.detailInfo}}
+				</view>
+			</view>
+			<view class="content loc-content" wx:if="{{!userAddress}}">
+				<view class="text-black">请选择收件人信息</view>
+				<view class="text-gray text-sm"></view>
+			</view>
+			<view class="action">
+				<text class="cuIcon-right"></text>
+			</view>
+		</navigator>
+		
+		<navigator class="cu-item" url='/pages/tuangou/user-address/index?select=true'>
+			<view class="cu-avatar">提</view>
+			<view class="content loc-content" wx:if="{{serviceStation}}">
+				<view class="flex">
+					<view class="text-black">{{serviceStation.name}}</view>
+					<!-- <view class="text-gray text-sm margin-left-sm">[{{serviceStation.phone}}]</view> -->
+				</view>
+				<view class="text-black text-sm overflow-2 loc-info">
+					{{serviceStation.province}}{{serviceStation.city}}{{serviceStation.county}}{{serviceStation.address}}
+				</view>
+			</view>
+			<view class="content loc-content" wx:if="{{!serviceStation}}">
+				<view class="text-black">请选择提货点</view>
+				<view class="text-gray text-sm">如您附近没有提货点，请联系客服</view>
+			</view>
+			<view class="action">
+				<text class="cuIcon-right"></text>
+			</view>
+		</navigator>
+	</view>
+	
+	<view class="cu-card article mar-top-30">
+		<view class="cu-item">
+			<view class="cu-list">
+				<view class="cu-item" wx:for="{{ orderConfirmData }}" wx:key>
+					<view class="flex align-center">
+						<view class="content">
+							<image src="{{item.picUrl ? item.picUrl : '/public/img/no_pic.png'}}" mode="aspectFill" class="row-img margin-top-xs"></image>
+							<view class="desc row-info">
+								<view class="text-black margin-top-sm overflow-2">{{item.spuName}}</view>
+								<view class="text-gray text-sm margin-top-xs cu-tag round" wx:if="{{item.specInfo}}">
+									{{item.specInfo}}
+								</view>
+								<view class="flex">
+									<view class="flex-sub">
+										<view class="text-price text-bold text-red margin-top-sm">{{item.salesPrice}}</view>
+									</view>
+								</view>
+								<view class="flex">
+									<view class="text-gray text-sm">
+										x{{item.quantity}}
+									</view>
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<!-- <view class="cu-card mar-top-30" wx:if="{{userAddress && userAddress.userId!='-1'}}">
+		<view class="cu-item cu-form-group align-start">
+			<view class="title">快递物流费：¥{{logisticsPrice}}</view>
+		</view>
+	</view> -->
+	<view class="cu-card mar-top-30">
+		<view class="cu-item cu-form-group align-start">
+			<view class="title">给卖家留言</view>
+			<textarea maxlength="40" bindinput="userMessageInput" placeholder=""></textarea>
+		</view>
+	</view>
+</view>
+<view class="cu-bar bg-white border foot">
+	<view class="flex response">
+		<view class="flex-sub"></view>
+		<view class="flex-treble bar-rt">
+			<text class="text-sm text-gray">共{{ orderConfirmData.length }}件，</text>
+			<text class="text-xs text-bold">合计：</text>
+			<text class="text-xl text-price text-red">{{totalPrice}}</text>
+			<button class="cu-btn bg-red round lg margin-left-sm" bindtap="orderSub" loading="{{loading}}" disabled="{{loading}}"
+			 type="">
+				提交订单
+			</button>
+		</view>
+	</view>
+</view>
+<user-auth />
